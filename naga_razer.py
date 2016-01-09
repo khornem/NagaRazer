@@ -12,7 +12,7 @@ from evdev.ecodes import keys
 import os
 import copy
 import pprint
-from subprocess import call
+from subprocess import call, Popen, PIPE
 
 
 
@@ -47,10 +47,14 @@ class NagaDaemon:
         fd.close()
 
         #print(self.config_data)
-
+        self.user = ""
+        self.map_index = 0
         self.current = {}
-        self._load_mapping(0)
+        self._load_mapping(self.map_index)
         self.print_current_mapping()
+
+        #verify user who called NagaDaemon
+        self._get_current_user()
 
         #open device
         try:
@@ -65,6 +69,13 @@ class NagaDaemon:
 
     def _load_mapping(self, id):
         self.current = copy.deepcopy(self.config_data['mappings'][id])
+        return 1
+
+    def _toggle_mapping(self):
+        next_index = ( self.map_index + 1 ) % len(self.config_data['mappings'])
+        self._load_mapping(next_index)
+        self.map_index = next_index
+        print("+++ current index {}".format(self.map_index))
         return 1
 
 
@@ -85,18 +96,32 @@ class NagaDaemon:
                 print event
                 print categorize(event)
 
+    def _get_current_user(self):
+        proc=Popen(['who','am','i'],stdout = PIPE)
+        output = proc.stdout.read()
+        self.user = output.split(' ')[0]
+        print "user: {}  pid= {}".format(self.user,proc.pid)
+
+
 
     def _execute_action(self,actions):
         for i in range(len(actions)):
-            if 'action' in actions[i]:
-                print(actions[i]['action'])
-                call(["xdotool",'key',actions[i]['action']])
-
-
-            elif 'string' in actions[i]:
-                msg = actions[i]['string']
-                for i in range(len(msg)):
-                    call(["xdotool",'key',msg[i]])
+            if 'type' in actions[i]:
+                if actions[i]['type'] == 'toggle':
+                    self._toggle_mapping()
+                    return 1
+                elif actions[i]['type'] == 'key':
+                    print(actions[i]['action'])
+                    call(["xdotool",'key',actions[i]['action']])
+                elif actions[i]['type'] == 'run':
+                    if 'command' in actions[i]:
+                        command = actions[i]['command']
+                        if 'params' in actions[i]:
+                            for j in range(len(actions[i]['params'])):
+                                command = command + " " + actions[i]['params'][j]
+                        pcommand = ['su', '-', '-c', command, self.user]
+                        print pcommand
+                        Popen(pcommand)
             else:
                 print("No action")
 
