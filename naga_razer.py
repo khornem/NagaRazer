@@ -47,14 +47,14 @@ class NagaDaemon:
         fd.close()
 
         #print(self.config_data)
-        self.user = ""
+        self.user = self.config_data['properties']['user']
         self.map_index = 0
         self.current = {}
         self._load_mapping(self.map_index)
         self.print_current_mapping()
 
         #verify user who called NagaDaemon
-        self._get_current_user()
+        #self._get_current_user()
 
         #open device
         try:
@@ -85,7 +85,7 @@ class NagaDaemon:
 
 
     def _listen_events(self):
-        self.dev.grab()
+        #self.dev.grab()
         for event in self.dev.read_loop():
             if event.type == ecodes.EV_KEY and event.value == 1:
                 keycode = keys[event.code]
@@ -109,19 +109,41 @@ class NagaDaemon:
             if 'type' in actions[i]:
                 if actions[i]['type'] == 'toggle':
                     self._toggle_mapping()
+                    self.print_current_mapping()
                     return 1
                 elif actions[i]['type'] == 'key':
                     print(actions[i]['action'])
                     call(["xdotool",'key',actions[i]['action']])
                 elif actions[i]['type'] == 'run':
+                    if 'user' in actions[i]:
+                        user = actions[i]['user']
+                    else:
+                        user = self.user
                     if 'command' in actions[i]:
                         command = actions[i]['command']
                         if 'params' in actions[i]:
                             for j in range(len(actions[i]['params'])):
                                 command = command + " " + actions[i]['params'][j]
-                        pcommand = ['su', '-', '-c', command, self.user]
+                        pcommand = ['su', '-', '-c', command, user]
                         print pcommand
                         Popen(pcommand)
+                elif actions[i]['type'] == 'click':
+                    if actions[i]['button'] == 'left':
+                        button = '1'
+                    elif actions[i]['button'] == 'right':
+                        button = '3'
+                    elif actions[i]['button'] == 'middle':
+                        button = '2'
+                    else:
+                        continue
+                    print(button)
+                    call(['xdotool', 'click', button])
+                elif actions[i]['type'] == 'position':
+                    try:
+                        call(['xdotool', 'mousemove', actions[i]['x'], actions[i]['y']])
+                    except:
+                        print('+++ error in position')
+                        return 0
             else:
                 print("No action")
 
