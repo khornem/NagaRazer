@@ -23,18 +23,17 @@ This is json example:
     "properties" : {
         "name" : "naga razer",
         "devices" : {
-            "sidebuttons" : "<path to device in /dev/input/>",
-            "frontbuttons" : "<path to device in /dev/input/>"
+            "sidebuttons" : "/dev/input/by-id/usb-Razer_Razer_Naga-if01-event-kbd",
+            "frontbuttons" : "/dev/input/event11"
 
         },
-        "user" : "<user>",
-        "default_mapping" : 0
+        "user" : "miguel"
 
     },
     "mappings" : [
         {
-            "description" : "<administrative name of the mapping>",
-            "id" : <int>,
+            "description" : "mapping for windows",
+            "id" : 1,
             "sidebuttons" : {
                 "KEY_1" : [
                     {
@@ -84,11 +83,19 @@ This is json example:
                 "KEY_7" : [
                     {
                         "type"   : "run",
+                        "user"   : "satec",
                         "command" : "gnome-terminal",
                         "params" : [
                             "--geometry=40x40",
                             "--working-directory=/tmp"
                         ]
+                    }
+                ],
+                "KEY_8" : [
+                    {
+                        "type"   : "run",
+                        "user"   : "root",
+                        "command" : "wireshark"
                     }
                 ],
                 "KEY_EQUAL" : [
