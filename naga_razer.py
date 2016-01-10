@@ -16,7 +16,7 @@ from subprocess import call, Popen, PIPE
 
 
 
-CONFIG = "/home/miguel/Dropbox/20_Programacion/04_python/13_naga"
+CONFIG = "/home/miguel/.config/NagaRazer"
 XDOTOOL = {
     'key' : 'key'
 }
@@ -29,9 +29,10 @@ class NagaDaemon:
     Class that implements naga razer macro mappings
     """
 
-    def __init__(self):
+    def __init__(self, config = '/home/miguel/.config/NagaRazer'):
 
-        config_file = CONFIG + "/" + "naga_config.json"
+        config_file = config + "/" + "naga_config.json"
+        print config_file
         try:
             fd = open(config_file)
         except:
@@ -80,8 +81,7 @@ class NagaDaemon:
 
 
     def print_current_mapping(self):
-        pp = pprint.PrettyPrinter(indent=4)
-        pp.pprint(self.current) 
+        print(json.dumps(self.current, indent = 3, sort_keys = True))
 
 
     def _listen_events(self):
