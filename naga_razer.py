@@ -21,6 +21,23 @@ XDOTOOL = {
     'key' : 'key'
 }
 
+NAGA_BUTTON = {
+    "KEY_1" : "1",
+    "KEY_2" : "2",
+    "KEY_3" : "3",
+    "KEY_4" : "4",
+    "KEY_5" : "5",
+    "KEY_6" : "6",
+    "KEY_7" : "7",
+    "KEY_8" : "8",
+    "KEY_9" : "9",
+    "KEY_0" : "10",
+    "KEY_MINUS" : "11",
+    "KEY_EQUAL" : "12",
+    "BTN_EXTRA" : "BTN_EXTRA",
+    "BTN_SIDE"  : "BTN_SIDE"
+}
+
 
 
 
@@ -31,7 +48,7 @@ class NagaDaemon:
 
     def __init__(self, config = '/home/miguel/.config/NagaRazer'):
 
-        config_file = config + "/" + "naga_config.json"
+        config_file = config + "/" + "naga_config2.json"
         print config_file
         try:
             fd = open(config_file)
@@ -89,9 +106,9 @@ class NagaDaemon:
         for event in self.dev.read_loop():
             if event.type == ecodes.EV_KEY and event.value == 1:
                 keycode = keys[event.code]
-                if keycode in self.current['sidebuttons']:
-                    print self.current['sidebuttons'][keycode]
-                    self._execute_action(self.current['sidebuttons'][keycode])
+                if NAGA_BUTTON[keycode] in self.current['sidebuttons']:
+                    print self.current['sidebuttons'][NAGA_BUTTON[keycode]]
+                    self._execute_action(self.current['sidebuttons'][NAGA_BUTTON[keycode]])
                 print keys[event.code]
                 print event
                 print categorize(event)
