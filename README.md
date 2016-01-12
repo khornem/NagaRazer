@@ -9,7 +9,7 @@ This program allows mapping buttons of razer naga classic mouse. The mapping wil
 
 Sidebutton actions are overrided by the program, but extra buttons in front of the button are not. These buttons will execute default action plus the programmed action (I was not able to grab only those buttons and not normal buttons)
 
-The main program is written in python, and it is based in the idea of Apocatarsis, which you may find in:
+The main program is written in python, and it is based in the idea and program of Apocatarsis, which you may find in:
 * https://www.reddit.com/r/razer/comments/37yc3y/tutorial_remapping_naga_side_keyboard_numpad_in/
 * https://github.com/apocatarsis/Naga_KeypadMapper
 
@@ -45,8 +45,8 @@ Mapping file is based in json format, which allows easy parsing and feature addi
 
 Mapping file must be named <code>naga_config.json</code> and the default file location should be <code>$HOME/.config/NagaRazer</code>
 
-This is json example:
-```
+This is a configuration file example:
+```json
 {
   "properties": {
     "name": "naga razer",
@@ -176,58 +176,58 @@ This is json example:
 
 ## Mapping properties
 
-* name: administrative name assigned to the mouse
-* devices : path to devices assigned to the mouse
-** sidebuttons : path to numeric sidebuttons. It is preferrable to use /dev/input/by-id/ symbolic links
-** frontbuttons : path to extra buttons (these buttons are not implemented right now)
-* user : user which will be used to run programs by default
-* default_mapping : mapping which will be used when the program starts (note that first mapping is 0)
+* **name**: administrative name assigned to the mouse
+* **devices** : path to devices assigned to the mouse
+ * **sidebuttons** : path to numeric sidebuttons. It is preferrable to use <code>/dev/input/by-id/</code> symbolic links
+ * **frontbuttons** : path to extra buttons (these buttons are not implemented right now)
+* **user** : user which will be used to run programs by default
+* **default_mapping** : mapping which will be used when the program starts (note that first mapping is 0)
 
 
 ## Mappings
 
 There may be as many mappings as you want. Each mapping may have the following attributes:
 
-* description : it is an administrative name for the mapping (it will be used to notify the user which mapping is being used when there is a mapping toggle)
-* id : an integer. It is not being used right now
-* sidebuttons|frontbuttons: specific mapping of each button set. If a button is not mapped it will use the default action.
+* **description** : it is an administrative name for the mapping (it will be used to notify the user which mapping is being used when there is a mapping toggle)
+* **id** : an integer. It is not being used right now
+* **sidebuttons|frontbuttons**: specific mapping of each button set. If a button is not mapped it will use the default action.
 
 ## Button mappings
 
 Buttons are defined after the number they are labelled with.
-* sidetbuttons are labelled from 01 to 12 (I used dd notation to ease sorting)
-* frontbuttons are labelled after names defined in <code>/usr/include/linux/input.h</code>
-** BTN_EXTRA
-** BTN_SIDE
+* **sidebuttons** are labelled from 01 to 12 (I used dd notation to ease sorting)
+* **frontbuttons** are labelled after names defined in <code>/usr/include/linux/input.h</code>
+ * BTN_EXTRA
+ * BTN_SIDE
 
 For each button mapping several actions may be taken, so macros may be built.
 
 ### Key action
 
-* type : 'key'
-* action : key or keys combination. They must be defined to be interpreted by xdotool (X keysym) and are case sensitive
+* **type** : 'key'
+* **action** : key or keys combination. They must be defined to be interpreted by xdotool (X keysym) and are case sensitive
 
 ### click action
 
-* type : 'key'
-* button : {'left'|'middle'|'right'}
+* **type** : 'click'
+* **button** : {'left'|'middle'|'right'}
 
 ### position action
 
 It moves mouse cursor to the specifed position. Coordinates center is in the left above corner.
 
-* type : 'position'
-* 'x' : x coordinate
-* 'y' : y coordinate
+* **type** : 'position'
+* **'x'** : x coordinate
+* **'y'** : y coordinate
 
 ### run action
 
 It executes a program:
 
-* type : 'run'
-* user : this is an optional parameter. If used it specifies which user will be used to execute the program. If the user does not have X11 privileges the program will not work. (This parameter is used to run programs as root, like wireshark)
-* command : name of the executable program
-* params : Optional parameter. Ordered list of all parameters passed to the program
+* **type** : 'run'
+* **user** : this is an optional parameter. If used it specifies which user will be used to execute the program. If the user does not have X11 privileges the program will not work. (This parameter is used to run programs as root, like wireshark)
+* **command** : name of the executable program
+* **params** : Optional parameter. Ordered list of all parameters passed to the program
 
 ### Toggle action
 
