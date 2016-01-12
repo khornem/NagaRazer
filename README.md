@@ -239,7 +239,7 @@ It changes button mappings to the next one in a round robin fashion.
 ## udev rule
 I have not been able to make udev rule work properly. It is executed five times. I have tried several configuration found on the web but none of them worked.
 
-As a workaround I have used this [http://stackoverflow.com/questions/19937584/udev-rule-runs-bash-script-multiple-times solution].
+As a workaround I have used this [solution](http://stackoverflow.com/questions/19937584/udev-rule-runs-bash-script-multiple-times).
 
 ## NagaConfigurator.py
 
@@ -255,6 +255,4 @@ The script grabs side buttons device, so all events are managed by it. However, 
 
 ## Macro recorder
 
-It is in my mind to make a simple macro recorder, but it is not a priority right now. 
-
-
+It is in my mind to make a simple macro recorder, but it is not a priority right now.
