@@ -26,6 +26,7 @@ pip install python-uinput
 
 echo "--- Creating naga_razer.py in /usr/local/bin for user $1"
 sed "s/miguel/$1/g" ./naga_razer.py > /usr/local/bin/naga_razer.py
+chmod a+x /usr/local/bin/naga_razer.py
 
 echo "--- Creating config in $HOME/.config/NagaRazer"
 mkdir $HOME/.config/NagaRazer
@@ -38,6 +39,7 @@ cp ./40-mouse-razer.rules /etc/udev/rules.d/
 
 echo "--- Creating udev script"
 sed "s/miguel/$1/g" ./udev-naga.sh > /usr/local/bin/udev-naga.sh
+chmod a+x /usr/local/bin/udev-naga.sh
 
 echo "--- Copying configurator script"
 cp ./NagaConfigurator.py /usr/local/bin/ 
