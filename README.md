@@ -1,11 +1,11 @@
 This program allows mapping buttons of razer naga classic mouse. The mapping will allow:
 * Execution simple action:
-** key or combination of key actions
-** click action (left, middle and right mouse buttons)
-** run a program (it may be run as any user defined in the system)
-** move the mouse cursor
+ * key or combination of key actions
+ * click action (left, middle and right mouse buttons)
+ * run a program (it may be run as any user defined in the system)
+ * move the mouse cursor
 * Execute multiple simple actions in a defined order.
-** This feature allows building macros
+ * This feature allows building macros
 
 Sidebutton actions are overrided by the program, but extra buttons in front of the button are not. These buttons will execute default action plus the programmed action (I was not able to grab only those buttons and not normal buttons)
 
