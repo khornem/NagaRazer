@@ -13,6 +13,7 @@ import os
 import copy
 import pprint
 from subprocess import call, Popen, PIPE
+import threading
 
 
 
@@ -70,6 +71,8 @@ class NagaDaemon:
         self.current = {}
         self._load_mapping(self.map_index)
         self.print_current_mapping()
+        self.dev = {}
+
 
         #verify user who called NagaDaemon
         #self._get_current_user()
@@ -77,12 +80,21 @@ class NagaDaemon:
         #open device
         try:
             device = self.config_data['properties']['devices']['sidebuttons']
-            self.dev = InputDevice(device)
+            self.dev['sidebuttons'] = InputDevice(device)
+        except:
+            print("+++ Error: {} does not exists sidebuttons".format(device))
+            return None
+        try:
+            device = self.config_data['properties']['devices']['frontbuttons']
+            self.dev['frontbuttons'] = InputDevice(device)
         except:
             print("+++ Error: {} does not exists".format(device))
+            return None
 
         #init loop
-        self._listen_events()
+        threading.Thread(target=self._listen_events, args=('sidebuttons',True,)).start()
+        threading.Thread(target=self._listen_events, args=('frontbuttons',False,)).start()
+        #self._listen_events('sidebuttons')
 
 
     def _load_mapping(self, id):
@@ -101,17 +113,22 @@ class NagaDaemon:
         print(json.dumps(self.current, indent = 3, sort_keys = True))
 
 
-    def _listen_events(self):
-        self.dev.grab()
-        for event in self.dev.read_loop():
+    def _listen_events(self, panel, grab):
+        if grab:
+            self.dev[panel].grab()
+        for event in self.dev[panel].read_loop():
             if event.type == ecodes.EV_KEY and event.value == 1:
                 keycode = keys[event.code]
-                if NAGA_BUTTON[keycode] in self.current['sidebuttons']:
-                    print self.current['sidebuttons'][NAGA_BUTTON[keycode]]
-                    self._execute_action(self.current['sidebuttons'][NAGA_BUTTON[keycode]])
-                print keys[event.code]
-                print event
-                print categorize(event)
+                try:
+                    if NAGA_BUTTON[keycode] in self.current[panel]:
+                        print self.current[panel][NAGA_BUTTON[keycode]]
+                        self._execute_action(self.current[panel][NAGA_BUTTON[keycode]])
+                    print keys[event.code]
+                    print event
+                    print categorize(event)
+                except:
+                    continue
+                
 
     def _get_current_user(self):
         proc=Popen(['who','am','i'],stdout = PIPE)
