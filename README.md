@@ -20,137 +20,128 @@ Mapping file is based in json format, which allows easy parsing and feature addi
 This is json example:
 ```
 {
-    "properties" : {
-        "name" : "naga razer",
-        "devices" : {
-            "sidebuttons" : "/dev/input/by-id/usb-Razer_Razer_Naga-if01-event-kbd",
-            "frontbuttons" : "/dev/input/event11"
-
-        },
-        "user" : "miguel"
-
+  "properties": {
+    "name": "naga razer",
+    "devices": {
+      "sidebuttons": "/dev/input/by-id/usb-Razer_Razer_Naga-if01-event-kbd",
+      "frontbuttons": "/dev/input/by-id/usb-Razer_Razer_Naga-event-mouse"
     },
-    "mappings" : [
-        {
-            "description" : "mapping for windows",
-            "id" : 1,
-            "sidebuttons" : {
-                "KEY_1" : [
-                    {
-                        "type"   : "key",
-                        "action" : "ctrl+Insert"
-                    }
-                ],
-                "KEY_2" : [
-                    {
-                        "type"   : "key",
-                        "action" : "shift+Insert"
-                    }
-                ],
-                "KEY_3" : [
-                    {
-                        "type"   : "key",
-                        "action" : "Alt"
-                    },
-                    {
-                        "type"   : "key",
-                        "action" : "4"
-                    },
-                    {
-                        "type"   : "key",
-                        "action" : "L"
-                    }
-                ],
-                "KEY_4" : [
-                    {
-                        "type"   : "key",
-                        "action" : "alt+4+L"
-                    }
-                ],
-                "KEY_5" : [
-                    {
-                        "type"   : "click",
-                        "button" : "right"
-                    }
-                ],
-                "KEY_6" : [
-                    {
-                        "type"   : "position",
-                        "x" : "200",
-                        "y" : "1079"
-                    }
-                ],
-                "KEY_7" : [
-                    {
-                        "type"   : "run",
-                        "user"   : "satec",
-                        "command" : "gnome-terminal",
-                        "params" : [
-                            "--geometry=40x40",
-                            "--working-directory=/tmp"
-                        ]
-                    }
-                ],
-                "KEY_8" : [
-                    {
-                        "type"   : "run",
-                        "user"   : "root",
-                        "command" : "wireshark"
-                    }
-                ],
-                "KEY_EQUAL" : [
-                    {
-                        "type"   : "toggle"
-                    }
-                ]
-            }
-
-        },
-        {
-            "description" : "mapping for visio",
-            "id" : 1,
-            "sidebuttons" : {
-                "KEY_1" : [
-                    {
-                        "type"   : "key",
-                        "action" : "ctrl+Insert"
-                    }
-                ],
-                "KEY_2" : [
-                    {
-                        "type"   : "key",
-                        "action" : "shift+Insert"
-                    }
-                ],
-                "KEY_3" : [
-                    {
-                        "type"   : "key",
-                        "action" : "Alt"
-                    },
-                    {
-                        "type"   : "key",
-                        "action" : "4"
-                    },
-                    {
-                        "type"   : "key",
-                        "action" : "L"
-                    }
-                ],
-                "KEY_4" : [
-                    {
-                        "type"   : "key",
-                        "action" : "alt+4+L"
-                    }
-                ],
-                "KEY_EQUAL" : [
-                    {
-                        "type"   : "toggle"
-                    }
-                ]
-            }
-
-        }
-    ]
+    "user": "miguel"
+  },
+  "mappings": [
+    {
+      "description": "mapping for Linux",
+      "id": 1,
+      "sidebuttons": {
+        "01": [
+          {
+            "type": "key",
+            "action": "ctrl+Super_L+Left"
+          }
+        ],
+        "02": [
+          {
+            "type": "key",
+            "action": "shift+Insert"
+          }
+        ],
+        "03": [
+          {
+            "type": "key",
+            "action": "ctrl+Super_L+Right"
+          }
+        ],
+        "04": [
+          {
+            "type": "key",
+            "action": "Shift_L+ctrl+Alt_L+Left"
+          }
+        ],
+        "06": [
+          {
+            "type": "key",
+            "action": "Shift_L+ctrl+Alt_L+Right"
+          }
+        ],
+        "07": [
+          {
+            "type": "run",
+            "command": "gnome-terminal",
+            "params": [
+              "--geometry=100x40"
+            ]
+          }
+        ],
+        "09": [
+          {
+            "type": "run",
+            "user": "root",
+            "command": "wireshark"
+          }
+        ],
+        "12": [
+          {
+            "type": "toggle"
+          }
+        ]
+      },
+      "frontbuttons": {
+        "BTN_EXTRA": [
+          {
+            "type": "run",
+            "command": "gnome-terminal",
+            "params": [
+              "--geometry=100x40"
+            ]
+          }
+        ],
+        "BTN_SIDE": []
+      }
+    },
+    {
+      "description": "mapping for visio",
+      "id": 1,
+      "sidebuttons": {
+        "01": [
+          {
+            "type": "key",
+            "action": "ctrl+Insert"
+          }
+        ],
+        "02": [
+          {
+            "type": "key",
+            "action": "shift+Insert"
+          }
+        ],
+        "03": [
+          {
+            "type": "key",
+            "action": "Alt"
+          },
+          {
+            "type": "key",
+            "action": "4"
+          },
+          {
+            "type": "key",
+            "action": "L"
+          }
+        ],
+        "04": [
+          {
+            "type": "key",
+            "action": "alt+4+L"
+          }
+        ],
+        "12": [
+          {
+            "type": "toggle"
+          }
+        ]
+      }
+    }
+  ]
 }
 ```
 
@@ -206,4 +197,6 @@ It executes a program:
 * command : name of the executable program
 * params : Optional parameter. Ordered list of all parameters passed to the program
 
+### Toggle action
 
+It changes button mappings to the next one in a round robin fashion.

@@ -189,7 +189,7 @@ class NagaConfigurator:
 
     def save_config(self):
         with open(self.config_file, 'w') as outfile:
-            json.dump(self.config_data, outfile, indent=4)
+            json.dump(self.config_data, outfile, indent=4, sort_keys=True)
 
 
 
