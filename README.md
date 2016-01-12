@@ -1,3 +1,4 @@
+# Summary
 This program allows mapping buttons of razer naga classic mouse. The mapping will allow:
 * Execution simple action:
  * key or combination of key actions
@@ -15,6 +16,9 @@ The main program is written in python, and it is based in the idea and program o
 
 It uses evdev package to handle mouse events.
 
+# Tested on
+
+I have tested this program on Ubuntu 14.04.
 
 # Installation instructions
 
