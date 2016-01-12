@@ -166,9 +166,13 @@ There may be as many mappings as you want. Each mapping may have the following a
 
 ## Button mappings
 
-Buttons must be named as defined in /usr/include/linux/input.h, because evdev takes the names from it (e.g: KEY_1, KEY_MINUS).
+Buttons are defined after the number they are labelled with.
+* sidetbuttons are labelled from 01 to 12 (I used dd notation to ease sorting)
+* frontbuttons are labelled after names defined in <code>/usr/include/linux/input.h</code>
+** BTN_EXTRA
+** BTN_SIDE
 
-For each button mapping several actions may be taken. This allows to make macros.
+For each button mapping several actions may be taken, so macros may be built.
 
 ### Key action
 
