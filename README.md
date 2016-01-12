@@ -7,15 +7,43 @@ This program allows mapping buttons of razer naga classic mouse. The mapping wil
 * Execute multiple simple actions in a defined order.
 ** This feature allows building macros
 
+Sidebutton actions are overrided by the program, but extra buttons in front of the button are not. These buttons will execute default action plus the programmed action (I was not able to grab only those buttons and not normal buttons)
+
 The main program is written in python, and it is based in the idea of Apocatarsis, which you may find in:
 * https://www.reddit.com/r/razer/comments/37yc3y/tutorial_remapping_naga_side_keyboard_numpad_in/
 * https://github.com/apocatarsis/Naga_KeypadMapper
 
 It uses evdev package to handle mouse events.
 
-# Mapping format
+
+# Installation instructions
+
+The following packages must be installed:
+* python-dev
+* python package evdev
+* xdotool
+* libudev-dev
+
+The following files are used:
+* <code>/usr/local/bin/NagaConfigurator.py</code>  
+* <code>/usr/local/bin/naga_razer.py</code> : this code must be modified to change default user 
+* <code>/usr/local/bin/udev-naga.sh.py</code>  : this code must be modified to change default user
+* <code>/etc/udev/rules.d/40-mouse-razer.rules</code>  
+* <code>$HOME/.config/NagaRazer/naga_config.json</code>  : this code must be modified to change default user
+
+A simple installation script has been programmed to make all these action, including changing default username (miguel) to the local username. 
+
+```
+sudo ./install.sh <username>
+```
+
+
+
+# Configuration file format
 
 Mapping file is based in json format, which allows easy parsing and feature adding.
+
+Mapping file must be named <code>naga_config.json</code> and the default file location should be <code>$HOME/.config/NagaRazer</code>
 
 This is json example:
 ```
@@ -204,3 +232,29 @@ It executes a program:
 ### Toggle action
 
 It changes button mappings to the next one in a round robin fashion.
+
+
+# PENDING ACTIONS
+
+## udev rule
+I have not been able to make udev rule work properly. It is executed five times. I have tried several configuration found on the web but none of them worked.
+
+As a workaround I have used this [http://stackoverflow.com/questions/19937584/udev-rule-runs-bash-script-multiple-times solution].
+
+## NagaConfigurator.py
+
+This script is very limited and does not allow complex actions like inserting actions in the middle of a macro.
+
+Code should be modularized. 
+
+## naga_razer.py
+
+Although sidebuttons perform only configured action, extra buttons perform both default action and new configured one.
+
+The script grabs side buttons device, so all events are managed by it. However, if script grabs front buttons device then it will have to handle regular mouse buttons, and it is not a good option. I have not found another way to override extra button mapping with this script.
+
+## Macro recorder
+
+It is in my mind to make a simple macro recorder, but it is not a priority right now. 
+
+

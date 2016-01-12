@@ -14,6 +14,7 @@ import copy
 import pprint
 from subprocess import call, Popen, PIPE
 import threading
+import sys
 
 
 
@@ -47,9 +48,9 @@ class NagaDaemon:
     Class that implements naga razer macro mappings
     """
 
-    def __init__(self, config = '/home/miguel/.config/NagaRazer'):
+    def __init__(self, config_dir = '/home/miguel/.config/NagaRazer'):
 
-        config_file = config + "/" + "naga_config.json"
+        config_file = config_dir + "/" + "naga_config.json"
         print config_file
         try:
             fd = open(config_file)
@@ -190,9 +191,18 @@ class NagaDaemon:
 
 
 
-def main():
-    naga=NagaDaemon()
+def main(args):
+    length = len(args)
+    if length == 1:
+        naga = NagaDaemon(args[0])
+    elif length == 0:
+        naga = NagaDaemon()
+    else:
+        print("""
+Usage: naga_razer.py [config_dir]
+  Configuration file must be named naga_config.json
+""")
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

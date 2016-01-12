@@ -1,2 +1,1 @@
-ACTION=="add", ATTRS{product}=="Razer Naga", SYMLINK+="NagaRazerMouse", RUN+="/usr/local/bin/udev-naga.sh"
-
+ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="1532", ATTRS{idProduct}=="0015", RUN+="/usr/local/bin/udev-naga.sh"
