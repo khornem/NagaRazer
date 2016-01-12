@@ -260,3 +260,7 @@ The script grabs side buttons device, so all events are managed by it. However, 
 ## Macro recorder
 
 It is in my mind to make a simple macro recorder, but it is not a priority right now.
+
+## deb package
+
+Making a deb package to automate installation and uninstallation.
