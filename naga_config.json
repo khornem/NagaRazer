@@ -1,0 +1,123 @@
+{
+    "mappings": [
+        {
+            "description": "mapping for Linux", 
+            "frontbuttons": {
+                "BTN_EXTRA": [
+                    {
+                        "command": "gnome-terminal", 
+                        "params": [
+                            "--geometry=100x40"
+                        ], 
+                        "type": "run"
+                    }
+                ], 
+                "BTN_SIDE": []
+            }, 
+            "id": 1, 
+            "sidebuttons": {
+                "01": [
+                    {
+                        "action": "ctrl+Super_L+Left", 
+                        "type": "key"
+                    }
+                ], 
+                "02": [
+                    {
+                        "action": "shift+Insert", 
+                        "type": "key"
+                    }
+                ], 
+                "03": [
+                    {
+                        "action": "ctrl+Super_L+Right", 
+                        "type": "key"
+                    }
+                ], 
+                "04": [
+                    {
+                        "action": "Shift_L+ctrl+Alt_L+Left", 
+                        "type": "key"
+                    }
+                ], 
+                "06": [
+                    {
+                        "action": "Shift_L+ctrl+Alt_L+Right", 
+                        "type": "key"
+                    }
+                ], 
+                "07": [
+                    {
+                        "command": "gnome-terminal", 
+                        "params": [
+                            "--geometry=100x40"
+                        ], 
+                        "type": "run"
+                    }
+                ], 
+                "09": [
+                    {
+                        "command": "wireshark", 
+                        "type": "run"
+                    }
+                ], 
+                "12": [
+                    {
+                        "type": "toggle"
+                    }
+                ]
+            }
+        }, 
+        {
+            "description": "mapping for visio", 
+            "id": 1, 
+            "sidebuttons": {
+                "01": [
+                    {
+                        "action": "ctrl+Insert", 
+                        "type": "key"
+                    }
+                ], 
+                "02": [
+                    {
+                        "action": "shift+Insert", 
+                        "type": "key"
+                    }
+                ], 
+                "03": [
+                    {
+                        "action": "Alt", 
+                        "type": "key"
+                    }, 
+                    {
+                        "action": "4", 
+                        "type": "key"
+                    }, 
+                    {
+                        "action": "L", 
+                        "type": "key"
+                    }
+                ], 
+                "04": [
+                    {
+                        "action": "alt+4+L", 
+                        "type": "key"
+                    }
+                ], 
+                "12": [
+                    {
+                        "type": "toggle"
+                    }
+                ]
+            }
+        }
+    ], 
+    "properties": {
+        "devices": {
+            "frontbuttons": "/dev/input/by-id/usb-Razer_Razer_Naga-event-mouse", 
+            "sidebuttons": "/dev/input/by-id/usb-Razer_Razer_Naga-if01-event-kbd"
+        }, 
+        "name": "naga razer", 
+        "user": "miguel"
+    }
+}
