@@ -18,7 +18,41 @@ It uses evdev package to handle mouse events.
 
 # Tested on
 
-I have tested this program on Ubuntu 14.04.
+I have tested this program on:
+* sony vaio pro with Ubuntu Desktop 14.04.03 LTS. Installation works fine without any problems
+```
+$ lsb_release  -d
+Description:  Ubuntu 14.04.3 LTS
+$ uname -a
+Linux vaio 3.19.3-031903-generic #201503261036 SMP Thu Mar 26 14:37:55 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+```
+* Custom PC with i7-5820k and Ubuntu 14.04.3 LTS
+```
+$ lsb_release -d
+Description:  Ubuntu 14.04.3 LTS
+$ uname -a
+Linux khorne 3.19.8-031908-generic #201505110938 SMP Mon May 11 13:39:59 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+```
+ * udev rule does not work. I have seen that symbolic links in <code>/dev/input/by-id/</code> are not created until script is executed. Therefore <code>naga_razer.py</code> program crashes.
+ * if you execute the program with superuser privileges after the mouse is connected it works without any problems
+
+* Lenovo L420 with Ubuntu 14.04.3 LTS:
+```
+$ lsb_release -d
+Description:  Ubuntu 14.04.3 LTS
+$ uname -a
+Linux mgfWork14 3.18.14-031814-generic #201505210236 SMP Thu May 21 06:37:42 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+```
+ * I have weird problems with this laptop. If I connect directly the mouse to any USB connector it does not work:
+   * with <code>udevadm monitor</code> I can see that the mouse have been detected
+   * symlinks are created
+   * mouse does not work, not only buttons, but the pointer as well
+ * If I power on the laptop with the mouse connected then it works. If I execute the script then mappings work.
+   * If I disconnect the mouse and connect it again then it stops working.
+ * If I connect the mouse through an old usb 2.0 hub then udev rules does not work, but program does. 
+
+I am working on understanding how udev works to try to make the script works out of the box. If anyone tries the script I would appreciate if you tell whether udev rule work or not, and if the program works or not with Ubuntu.
+
 
 # Installation instructions
 

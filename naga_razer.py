@@ -162,6 +162,10 @@ class NagaDaemon:
                         pcommand = ['su', '-', '-c', command, user]
                         print pcommand
                         Popen(pcommand)
+                        #threading.Thread(target=Popen, args=(pcommand,)).start()
+                        #p = Popen(pcommand, stdout = PIPE, stderr = PIPE)
+                        #out = p.stdout.read()
+                        #print out
                 elif actions[i]['type'] == 'click':
                     if actions[i]['button'] == 'left':
                         button = '1'
