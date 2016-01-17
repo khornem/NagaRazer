@@ -145,6 +145,13 @@ class NagaDaemon:
         for i in range(len(actions)):
             #print "action : {} of {}".format(i,len(actions))
             if 'type' in actions[i]:
+                if 'delay' in actions[i]:
+                    try:
+                        delay = float(actions[i]['delay'])
+                        print("--- delay = {}".format(delay))
+                        sleep(delay)
+                    except:
+                        print("+++ Error in sleep. Incorrect value : {}".format(actions[i]['delay']))
                 if actions[i]['type'] == 'toggle':
                     self._toggle_mapping()
                     self.print_current_mapping()
@@ -178,8 +185,6 @@ class NagaDaemon:
                         button = '2'
                     else:
                         continue
-                    #print(button)
-                    sleep(DELAY)
                     pcommand = ['xdotool', 'click', button]
                     Popen(pcommand)
                     #print("xdotool click {}".format(button))
