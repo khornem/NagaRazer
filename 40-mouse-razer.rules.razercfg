@@ -1,0 +1,1 @@
+ACTION=="add", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="1532", ATTRS{idProduct}=="0015", SYMLINK+="NagaRazerMouse", RUN+="/usr/local/bin/udev-naga.sh"

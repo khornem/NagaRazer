@@ -549,8 +549,8 @@ def main(args):
                     continue
 
                 action = [{ 
-                    "type"   : "key",
-                    "action" : click_action
+                    "type"   : "click",
+                    "button" : click_action
                 }]
                 config.add_action(map_id,'sidebuttons',button_choice, action)
                 continue

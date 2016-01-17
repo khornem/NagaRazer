@@ -15,7 +15,7 @@ import pprint
 from subprocess import call, Popen, PIPE
 import threading
 import sys
-
+from time import sleep
 
 
 CONFIG = "/home/miguel/.config/NagaRazer"
@@ -40,6 +40,7 @@ NAGA_BUTTON = {
     "BTN_SIDE"  : "BTN_SIDE"
 }
 
+DELAY = 0.1
 
 
 
@@ -122,7 +123,7 @@ class NagaDaemon:
                 keycode = keys[event.code]
                 try:
                     if NAGA_BUTTON[keycode] in self.current[panel]:
-                        print self.current[panel][NAGA_BUTTON[keycode]]
+                        print json.dumps(self.current[panel][NAGA_BUTTON[keycode]], indent = 2)
                         self._execute_action(self.current[panel][NAGA_BUTTON[keycode]])
                     print keys[event.code]
                     print event
@@ -140,7 +141,9 @@ class NagaDaemon:
 
 
     def _execute_action(self,actions):
+
         for i in range(len(actions)):
+            #print "action : {} of {}".format(i,len(actions))
             if 'type' in actions[i]:
                 if actions[i]['type'] == 'toggle':
                     self._toggle_mapping()
@@ -175,9 +178,12 @@ class NagaDaemon:
                         button = '2'
                     else:
                         continue
-                    print(button)
-                    call(['xdotool', 'click', button])
-                elif actions[i]['type'] == 'position':
+                    #print(button)
+                    sleep(DELAY)
+                    pcommand = ['xdotool', 'click', button]
+                    Popen(pcommand)
+                    #print("xdotool click {}".format(button))
+                elif actions[i]['type'] == 'position':                    
                     try:
                         call(['xdotool', 'mousemove', actions[i]['x'], actions[i]['y']])
                     except:
